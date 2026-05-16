@@ -1,0 +1,85 @@
+import { FadeIn } from './FadeIn';
+import { SectionTag } from './SectionTag';
+import { hexToRGBA } from '../utils/color';
+
+const BRANDS = [
+  { name: 'Stake',      src: '/uploads/stake.png',     h: 60, invert: true },
+  { name: 'Roobet',     src: '/uploads/roobet.svg',    h: 62, invert: false },
+  { name: 'Shuffle',    src: '/uploads/shuffle.webp',  h: 64, invert: false, fit: 'left' },
+  { name: '500 Casino', src: '/uploads/500casino.svg', h: 90, invert: false },
+];
+
+function ImageLogo({ brand }) {
+  return (
+    <img
+      src={brand.src}
+      alt={brand.name}
+      style={{
+        height: brand.h,
+        width: 'auto',
+        maxWidth: 300,
+        objectFit: 'contain',
+        objectPosition: brand.fit === 'left' ? 'left center' : 'center',
+        filter: brand.invert ? 'invert(1) brightness(1.1)' : 'none',
+        opacity: 0.85,
+        transition: 'opacity 0.45s, filter 0.45s',
+      }}
+      className="brand-img"
+      draggable={false}
+    />
+  );
+}
+
+function BrandItem({ brand, accent }) {
+  return (
+    <div className="brand-item" style={{
+      flexShrink: 0, display: 'flex', alignItems: 'center',
+      justifyContent: 'center', cursor: 'default',
+      padding: '28px 56px', borderRadius: 16, position: 'relative',
+      height: 130, minWidth: 300,
+      transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
+      '--glow': hexToRGBA(accent, 0.4),
+    }}>
+      <ImageLogo brand={brand} />
+    </div>
+  );
+}
+
+export function Brands({ accent, headingFont }) {
+  const rowA = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS];
+  const rowB = [...BRANDS.slice(2), ...BRANDS.slice(0, 2), ...BRANDS, ...BRANDS, ...BRANDS];
+
+  return (
+    <section id="brands" style={{
+      padding: '100px 0 80px', position: 'relative',
+      background: 'radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.025), transparent 70%)',
+    }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', textAlign: 'center', padding: '0 48px' }}>
+        <FadeIn>
+          <SectionTag text="Our Partners" accent={accent} />
+          <h2 style={{
+            fontFamily: headingFont, fontSize: 64, fontWeight: 800,
+            color: '#fff', margin: '0 0 80px', letterSpacing: '-0.02em',
+            textTransform: 'uppercase', lineHeight: 1.05,
+          }}>Trusted by Leading Brands</h2>
+        </FadeIn>
+      </div>
+      <FadeIn>
+        <div className="marquee-stage">
+          <div className="marquee-fade marquee-fade-left" />
+          <div className="marquee-fade marquee-fade-right" />
+          <div className="marquee-row">
+            <div className="marquee-track marquee-track-left">
+              {rowA.map((b, i) => <BrandItem key={`a-${i}`} brand={b} accent={accent} />)}
+            </div>
+          </div>
+          <div className="marquee-row" style={{ marginTop: 32 }}>
+            <div className="marquee-track marquee-track-right">
+              {rowB.map((b, i) => <BrandItem key={`b-${i}`} brand={b} accent={accent} />)}
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
