@@ -36,7 +36,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
     width: '100%', boxSizing: 'border-box',
     background: 'rgba(255,255,255,0.02)',
     border: '1px solid rgba(255,255,255,0.07)',
-    padding: '20px 22px', fontSize: 17, fontFamily: bodyFont, color: '#fff',
+    padding: '15px 18px', fontSize: 15, fontFamily: bodyFont, color: '#fff',
     outline: 'none', transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
   };
 
@@ -53,20 +53,20 @@ export function Contact({ accent, headingFont, bodyFont }) {
       }} />
       <AnimatedDivider accent={accent} />
       <div style={{
-        maxWidth: 1400, margin: '0 auto', paddingTop: 40,
-        display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 100, alignItems: 'start',
+        maxWidth: 1100, margin: '0 auto', paddingTop: 40,
+        display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'start',
       }}>
         <div>
           <FadeIn direction="right">
             <SectionTag text="Get In Touch" accent={accent} />
             <h2 style={{
-              fontFamily: headingFont, fontSize: 80, fontWeight: 800,
-              color: '#fff', margin: '0 0 28px', lineHeight: 1.05,
+              fontFamily: headingFont, fontSize: 56, fontWeight: 800,
+              color: '#fff', margin: '0 0 20px', lineHeight: 1.05,
               letterSpacing: '-0.02em', textTransform: 'uppercase',
             }}>
               Let's Build<br /><span style={{ color: accent }}>Something Big</span>
             </h2>
-            <p style={{ fontFamily: bodyFont, fontSize: 19, lineHeight: 1.8, color: 'rgba(255,255,255,0.4)', margin: '0 0 48px', maxWidth: 460 }}>
+            <p style={{ fontFamily: bodyFont, fontSize: 16, lineHeight: 1.8, color: 'rgba(255,255,255,0.4)', margin: '0 0 40px', maxWidth: 380 }}>
               Ready to dominate your market? Drop us a line and let's talk about your next move.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -79,13 +79,13 @@ export function Contact({ accent, headingFont, bodyFont }) {
         <FadeIn direction="left" delay={0.1}>
           <div style={{
             background: 'rgba(255,255,255,0.015)', border: '1px solid rgba(255,255,255,0.06)',
-            padding: '56px 48px', position: 'relative', overflow: 'hidden',
+            padding: '40px 36px', position: 'relative', overflow: 'hidden',
           }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, width: 80, height: 2, background: accent }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: 2, height: 80, background: accent }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 60, height: 2, background: accent }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 2, height: 60, background: accent }} />
             <h3 style={{
-              fontFamily: headingFont, fontSize: 22, fontWeight: 700,
-              color: '#fff', margin: '0 0 36px', letterSpacing: '0.06em', textTransform: 'uppercase',
+              fontFamily: headingFont, fontSize: 18, fontWeight: 700,
+              color: '#fff', margin: '0 0 28px', letterSpacing: '0.06em', textTransform: 'uppercase',
             }}>Send a Message</h3>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[

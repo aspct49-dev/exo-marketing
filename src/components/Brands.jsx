@@ -3,10 +3,10 @@ import { SectionTag } from './SectionTag';
 import { hexToRGBA } from '../utils/color';
 
 const BRANDS = [
-  { name: 'Stake',      src: '/uploads/stake.png',     h: 60, invert: true },
-  { name: 'Roobet',     src: '/uploads/roobet.svg',    h: 62, invert: false },
-  { name: 'Shuffle',    src: '/uploads/shuffle.webp',  h: 64, invert: false, fit: 'left' },
-  { name: '500 Casino', src: '/uploads/500casino.svg', h: 90, invert: false },
+  { name: 'Stake',      src: '/uploads/stake.png',     h: 44, invert: true },
+  { name: 'Roobet',     src: '/uploads/roobet.svg',    h: 46, invert: false },
+  { name: 'Shuffle',    src: '/uploads/shuffle.webp',  h: 48, invert: false, fit: 'left' },
+  { name: '500 Casino', src: '/uploads/500casino.svg', h: 64, invert: false },
 ];
 
 function ImageLogo({ brand }) {
@@ -17,7 +17,7 @@ function ImageLogo({ brand }) {
       style={{
         height: brand.h,
         width: 'auto',
-        maxWidth: 300,
+        maxWidth: 220,
         objectFit: 'contain',
         objectPosition: brand.fit === 'left' ? 'left center' : 'center',
         filter: brand.invert ? 'invert(1) brightness(1.1)' : 'none',
@@ -35,8 +35,8 @@ function BrandItem({ brand, accent }) {
     <div className="brand-item" style={{
       flexShrink: 0, display: 'flex', alignItems: 'center',
       justifyContent: 'center', cursor: 'default',
-      padding: '28px 56px', borderRadius: 16, position: 'relative',
-      height: 130, minWidth: 300,
+      padding: '20px 36px', borderRadius: 16, position: 'relative',
+      height: 96, minWidth: 220,
       transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
       '--glow': hexToRGBA(accent, 0.4),
     }}>
@@ -54,12 +54,12 @@ export function Brands({ accent, headingFont }) {
       padding: '100px 0 80px', position: 'relative',
       background: 'radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.025), transparent 70%)',
     }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', textAlign: 'center', padding: '0 48px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center', padding: '0 48px' }}>
         <FadeIn>
           <SectionTag text="Our Partners" accent={accent} />
           <h2 style={{
-            fontFamily: headingFont, fontSize: 64, fontWeight: 800,
-            color: '#fff', margin: '0 0 80px', letterSpacing: '-0.02em',
+            fontFamily: headingFont, fontSize: 44, fontWeight: 800,
+            color: '#fff', margin: '0 0 64px', letterSpacing: '-0.02em',
             textTransform: 'uppercase', lineHeight: 1.05,
           }}>Trusted by Leading Brands</h2>
         </FadeIn>

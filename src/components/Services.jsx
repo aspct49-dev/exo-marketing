@@ -23,12 +23,12 @@ export function Services({ accent, headingFont, bodyFont }) {
         WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 75%)',
       }} />
       <AnimatedDivider accent={accent} />
-      <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         <FadeIn>
           <SectionTag text="What We Do" accent={accent} />
           <h2 style={{
-            fontFamily: headingFont, fontSize: 72, fontWeight: 800,
-            color: '#fff', margin: '0 0 80px', letterSpacing: '-0.02em',
+            fontFamily: headingFont, fontSize: 48, fontWeight: 800,
+            color: '#fff', margin: '0 0 64px', letterSpacing: '-0.02em',
             textTransform: 'uppercase', lineHeight: 1.05,
           }}>Our Services</h2>
         </FadeIn>
@@ -36,22 +36,22 @@ export function Services({ accent, headingFont, bodyFont }) {
           {SERVICES.map((s, i) => (
             <FadeIn key={i} delay={i * 0.06}>
               <div className="service-row" style={{
-                display: 'grid', gridTemplateColumns: '80px 1fr 1.2fr', gap: 48,
-                alignItems: 'baseline', padding: '52px 0',
+                display: 'grid', gridTemplateColumns: '60px 1fr 1.2fr', gap: 32,
+                alignItems: 'baseline', padding: '36px 0',
                 borderTop: '1px solid rgba(255,255,255,0.06)',
                 cursor: 'default', transition: 'all 0.3s', position: 'relative',
               }}>
                 <span className="service-num" style={{
-                  fontFamily: headingFont, fontSize: 16, fontWeight: 700,
+                  fontFamily: headingFont, fontSize: 13, fontWeight: 700,
                   color: accent, letterSpacing: '0.05em',
                 }}>{s.num}</span>
                 <h3 className="service-title" style={{
-                  fontFamily: headingFont, fontSize: 40, fontWeight: 700,
+                  fontFamily: headingFont, fontSize: 28, fontWeight: 700,
                   color: '#fff', margin: 0, textTransform: 'uppercase',
                   letterSpacing: '-0.01em', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
                 }}>{s.title}</h3>
                 <p style={{
-                  fontFamily: bodyFont, fontSize: 18, lineHeight: 1.7,
+                  fontFamily: bodyFont, fontSize: 15, lineHeight: 1.7,
                   color: 'rgba(255,255,255,0.35)', margin: 0, transition: 'color 0.3s',
                 }}>{s.desc}</p>
               </div>

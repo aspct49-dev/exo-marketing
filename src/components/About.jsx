@@ -5,19 +5,19 @@ import { AnimatedCounter } from './AnimatedCounter';
 function StatBlock({ value, suffix, label, accent, headingFont, bodyFont, isLast }) {
   return (
     <div className="stat-block" style={{
-      padding: '80px 40px',
+      padding: '60px 32px',
       borderRight: isLast ? 'none' : '1px solid rgba(255,255,255,0.08)',
       transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
       position: 'relative', cursor: 'default',
     }}>
       <div style={{
-        fontFamily: headingFont, fontSize: 120, fontWeight: 800,
-        color: '#fff', marginBottom: 14, letterSpacing: '-0.03em', lineHeight: 1,
+        fontFamily: headingFont, fontSize: 84, fontWeight: 800,
+        color: '#fff', marginBottom: 10, letterSpacing: '-0.03em', lineHeight: 1,
       }}>
         <AnimatedCounter target={value} suffix={suffix} />
       </div>
       <div style={{
-        fontFamily: bodyFont, fontSize: 14, color: 'rgba(255,255,255,0.4)',
+        fontFamily: bodyFont, fontSize: 12, color: 'rgba(255,255,255,0.4)',
         fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase',
       }}>{label}</div>
     </div>
@@ -28,25 +28,25 @@ export function About({ accent, headingFont, bodyFont }) {
   return (
     <section id="about" style={{ padding: '140px 48px 120px', position: 'relative', background: '#050505' }}>
       <div className="about-side-line" />
-      <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 100, alignItems: 'start', marginBottom: 100 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 80, alignItems: 'start', marginBottom: 80 }}>
           <div>
             <FadeIn direction="right">
               <SectionTag text="Who We Are" accent={accent} />
               <h2 style={{
-                fontFamily: headingFont, fontSize: 96, fontWeight: 800,
-                color: '#fff', margin: '0 0 36px', lineHeight: 0.95,
+                fontFamily: headingFont, fontSize: 72, fontWeight: 800,
+                color: '#fff', margin: '0 0 28px', lineHeight: 0.95,
                 letterSpacing: '-0.025em', textTransform: 'uppercase',
               }}>Built <span style={{ color: accent }}>Different.</span><br />Built To Win.</h2>
             </FadeIn>
           </div>
           <div>
             <FadeIn direction="left" delay={0.1}>
-              <p style={{ fontFamily: bodyFont, fontSize: 20, lineHeight: 1.7, color: 'rgba(255,255,255,0.55)', margin: '0 0 24px' }}>
+              <p style={{ fontFamily: bodyFont, fontSize: 17, lineHeight: 1.7, color: 'rgba(255,255,255,0.55)', margin: '0 0 18px' }}>
                 A full-service marketing agency built for the operators, founders,
                 and challengers who refuse to play it safe.
               </p>
-              <p style={{ fontFamily: bodyFont, fontSize: 17, lineHeight: 1.75, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+              <p style={{ fontFamily: bodyFont, fontSize: 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
                 We combine raw creativity with hard data — building campaigns
                 that don't just perform, they dominate. From scrappy launches to
                 category leaders, we work with brands ready to make noise.
