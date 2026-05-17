@@ -7,6 +7,8 @@ const BRANDS = [
   { name: 'Roobet',     src: '/uploads/roobet.svg',    h: 46, invert: false },
   { name: 'Shuffle',    src: '/uploads/shuffle.webp',  h: 48, invert: false, fit: 'left' },
   { name: '500 Casino', src: '/uploads/500casino.svg', h: 64, invert: false },
+  { name: 'Gamdom',     src: '/uploads/gamdom.png',    h: 56, invert: false, fit: 'left' },
+  { name: 'Kick',       src: '/uploads/kick.png',      h: 38, invert: false },
 ];
 
 function ImageLogo({ brand }) {

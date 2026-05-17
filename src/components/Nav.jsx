@@ -11,7 +11,7 @@ export function Nav({ accent, headingFont }) {
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      padding: '0 48px', height: 72,
+      padding: '0 56px', height: 96,
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       background: scrolled ? 'rgba(0,0,0,0.85)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -20,7 +20,7 @@ export function Nav({ accent, headingFont }) {
       transition: 'all 0.35s ease',
     }}>
       <a href="#home" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: 38, width: 'auto' }} />
+        <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: 72, width: 'auto' }} />
       </a>
       <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
         {['Services', 'About', 'Brands'].map(l => (
