@@ -24,7 +24,7 @@ export function Nav({ accent, headingFont }) {
       transition: 'all 0.35s ease',
     }}>
       <a href="#home" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', justifySelf: 'start' }}>
-        <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: isMobile ? 44 : 72, width: 'auto' }} />
+        <img src="/uploads/content.png" alt="ExoMarketing — iGaming marketing agency" width="144" height="72" style={{ height: isMobile ? 44 : 72, width: 'auto' }} />
       </a>
       <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 36, justifySelf: 'center' }}>
         {!isMobile && ['Services', 'About', 'Brands'].map(l => (

@@ -16,7 +16,9 @@ function ImageLogo({ brand }) {
   return (
     <img
       src={brand.src}
-      alt={brand.name}
+      alt={`${brand.name} logo — ExoMarketing client`}
+      loading="lazy"
+      decoding="async"
       style={{
         height: brand.h,
         width: 'auto',

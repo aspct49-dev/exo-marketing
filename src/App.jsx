@@ -57,13 +57,15 @@ export default function App() {
         ) : (
           <>
             <Nav {...props} />
-            <Hero {...props} />
-            <Brands {...props} />
-            <Services {...props} />
-            <Process {...props} />
-            <About {...props} />
-            <CTABanner {...props} />
-            <Contact {...props} />
+            <main>
+              <Hero {...props} />
+              <Brands {...props} />
+              <Services {...props} />
+              <Process {...props} />
+              <About {...props} />
+              <CTABanner {...props} />
+              <Contact {...props} />
+            </main>
             <Footer {...props} />
           </>
         )}

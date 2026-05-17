@@ -35,7 +35,7 @@ export function Footer({ accent, headingFont, bodyFont }) {
         }}>
           <div>
             <a href="#home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginBottom: 20 }}>
-              <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: 56, width: 'auto' }} />
+              <img src="/uploads/content.png" alt="ExoMarketing — iGaming marketing agency" width="112" height="56" loading="lazy" style={{ height: 56, width: 'auto' }} />
             </a>
             <p style={{ fontFamily: bodyFont, fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.45)', margin: '0 0 24px', maxWidth: 360 }}>
               Digital marketing that doesn't whisper. We build campaigns that move audiences,

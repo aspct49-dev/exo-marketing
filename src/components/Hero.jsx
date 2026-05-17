@@ -18,7 +18,9 @@ export function Hero({ accent, headingFont, bodyFont }) {
 
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', maxWidth: 1280, width: '100%' }}>
         <FadeIn>
-          <img src="/uploads/content.png" alt="ExoMarketing"
+          <img src="/uploads/content.png"
+               alt="ExoMarketing — iGaming marketing agency"
+               width="600" height="300" fetchpriority="high"
                style={{ height: isMobile ? 170 : 300, width: 'auto', marginBottom: isMobile ? -30 : -70 }}
                className="hero-logo" />
         </FadeIn>
