@@ -24,14 +24,51 @@ function InfoItem({ icon, label, value, bodyFont }) {
 
 export function Contact({ accent, headingFont, bodyFont }) {
   const [form, setForm] = useState({ name: '', contact: '', company: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle');
   const [focused, setFocused] = useState(null);
   const isMobile = useIsMobile();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => { setSent(false); setForm({ name: '', contact: '', company: '', message: '' }); }, 2500);
+    if (status === 'sending') return;
+    const webhook = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
+    if (!webhook) {
+      console.error('VITE_DISCORD_WEBHOOK_URL is not set');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+    setStatus('sending');
+    const payload = {
+      username: 'ExoMarketing',
+      embeds: [{
+        title: '🎯 New Inquiry from ExoMarketing Website',
+        color: 0x5865F2,
+        fields: [
+          { name: '👤 Name',    value: form.name.slice(0, 256) || '—',          inline: true },
+          { name: '💬 Contact', value: form.contact.slice(0, 256) || '—',       inline: true },
+          { name: '🏢 Company', value: form.company.slice(0, 256) || '—',       inline: false },
+          { name: '📝 Message', value: form.message.slice(0, 1024) || '—',      inline: false },
+        ],
+        footer: { text: 'ExoMarketing Contact Form' },
+        timestamp: new Date().toISOString(),
+      }],
+    };
+    try {
+      const res = await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Discord webhook failed: ${res.status}`);
+      setStatus('sent');
+      setForm({ name: '', contact: '', company: '', message: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   const inputBase = {
@@ -127,14 +164,20 @@ export function Contact({ accent, headingFont, bodyFont }) {
                           className="contact-input"
                           style={{ ...inputBase, resize: 'vertical', minHeight: 120, borderColor: focused === 'message' ? accent : 'rgba(255,255,255,0.07)' }} />
               </div>
-              <button type="submit" className="btn-primary" style={{
-                background: sent ? '#10b981' : accent, color: '#000',
+              <button type="submit" disabled={status === 'sending'} className="btn-primary" style={{
+                background: status === 'sent' ? '#10b981' : status === 'error' ? '#ef4444' : accent,
+                color: '#000',
                 padding: '16px 36px', fontSize: 13, fontWeight: 700,
-                fontFamily: headingFont, border: 'none', cursor: 'pointer',
+                fontFamily: headingFont, border: 'none',
+                cursor: status === 'sending' ? 'wait' : 'pointer',
+                opacity: status === 'sending' ? 0.7 : 1,
                 transition: 'all 0.3s', width: '100%',
                 letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 4,
               }}>
-                {sent ? '✓ Sent' : 'Send Message →'}
+                {status === 'sending' && 'Sending…'}
+                {status === 'sent' && '✓ Sent'}
+                {status === 'error' && '✕ Failed — try again'}
+                {status === 'idle' && 'Send Message →'}
               </button>
             </form>
           </div>
