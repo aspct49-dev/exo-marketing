@@ -10,8 +10,8 @@ export function AnimatedCounter({ target, prefix = '', suffix = '', duration = 1
     const start = performance.now();
     const tick = (now) => {
       const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setCount(Math.floor(eased * num));
+      const eased = num <= 20 ? t : 1 - Math.pow(1 - t, 3);
+      setCount(t === 1 ? num : Math.floor(eased * num));
       if (t < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
