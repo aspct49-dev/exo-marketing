@@ -3,7 +3,7 @@ import { SectionTag } from './SectionTag';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-function StatBlock({ value, suffix, label, accent, headingFont, bodyFont, isLast, isMobile, index }) {
+function StatBlock({ value, prefix, suffix, label, accent, headingFont, bodyFont, isLast, isMobile, index }) {
   return (
     <div className="stat-block" style={{
       padding: isMobile ? '32px 16px' : '60px 32px',
@@ -18,7 +18,7 @@ function StatBlock({ value, suffix, label, accent, headingFont, bodyFont, isLast
         fontFamily: headingFont, fontSize: isMobile ? 44 : 84, fontWeight: 800,
         color: '#fff', marginBottom: 10, letterSpacing: '-0.03em', lineHeight: 1,
       }}>
-        <AnimatedCounter target={value} suffix={suffix} />
+        <AnimatedCounter target={value} prefix={prefix} suffix={suffix} />
       </div>
       <div style={{
         fontFamily: bodyFont, fontSize: 12, color: 'rgba(255,255,255,0.4)',
@@ -74,7 +74,7 @@ export function About({ accent, headingFont, bodyFont }) {
           }}>
             <StatBlock value={100} suffix="+" label="Projects Delivered" accent={accent} headingFont={headingFont} bodyFont={bodyFont} isMobile={isMobile} index={0} />
             <StatBlock value={98} suffix="%" label="Client Retention" accent={accent} headingFont={headingFont} bodyFont={bodyFont} isMobile={isMobile} index={1} />
-            <StatBlock value={250} suffix="M+" label="Revenue Generated" accent={accent} headingFont={headingFont} bodyFont={bodyFont} isMobile={isMobile} index={2} />
+            <StatBlock value={5} prefix="$" suffix="M+" label="Revenue Generated" accent={accent} headingFont={headingFont} bodyFont={bodyFont} isMobile={isMobile} index={2} />
             <StatBlock value={24} suffix="/7" label="Support & Strategy" accent={accent} headingFont={headingFont} bodyFont={bodyFont} isLast isMobile={isMobile} index={3} />
           </div>
         </FadeIn>

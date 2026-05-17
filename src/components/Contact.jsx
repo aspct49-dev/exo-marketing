@@ -23,7 +23,7 @@ function InfoItem({ icon, label, value, bodyFont }) {
 }
 
 export function Contact({ accent, headingFont, bodyFont }) {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', contact: '', company: '', message: '' });
   const [sent, setSent] = useState(false);
   const [focused, setFocused] = useState(null);
   const isMobile = useIsMobile();
@@ -31,7 +31,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSent(true);
-    setTimeout(() => { setSent(false); setForm({ name: '', email: '', message: '' }); }, 2500);
+    setTimeout(() => { setSent(false); setForm({ name: '', contact: '', company: '', message: '' }); }, 2500);
   };
 
   const inputBase = {
@@ -92,8 +92,9 @@ export function Contact({ accent, headingFont, bodyFont }) {
             }}>Send a Message</h3>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { key: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
-                { key: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
+                { key: 'name', label: 'Your Name', type: 'text', placeholder: 'Your name' },
+                { key: 'contact', label: 'Discord ID / Telegram ID', type: 'text', placeholder: 'Discord ID/Telegram ID' },
+                { key: 'company', label: 'Company Name', type: 'text', placeholder: 'Company name' },
               ].map(({ key, label, type, placeholder }) => (
                 <div key={key}>
                   <label style={{
@@ -117,7 +118,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
                   color: focused === 'message' ? accent : 'rgba(255,255,255,0.3)',
                   letterSpacing: '0.08em', textTransform: 'uppercase',
                   marginBottom: 6, display: 'block', transition: 'color 0.3s',
-                }}>Message</label>
+                }}>Tell us about your project</label>
                 <textarea placeholder="Tell us about your project..." rows={5} required
                           value={form.message}
                           onChange={e => setForm({ ...form, message: e.target.value })}
