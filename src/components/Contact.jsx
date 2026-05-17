@@ -70,8 +70,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
               Ready to dominate your market? Drop us a line and let's talk about your next move.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <InfoItem icon="✉" label="Email" value="hello@exomarketing.gg" bodyFont={bodyFont} />
-              <InfoItem icon="𝕏" label="Social" value="@exomarketing" bodyFont={bodyFont} />
+              <InfoItem icon="✉" label="Contact Us On" value="contact@exomarketing.gg" bodyFont={bodyFont} />
             </div>
           </FadeIn>
         </div>

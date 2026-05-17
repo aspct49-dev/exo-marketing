@@ -16,13 +16,6 @@ function FooterCol({ title, items, headingFont, bodyFont }) {
   );
 }
 
-const SOCIALS = [
-  { label: 'X', symbol: '𝕏' },
-  { label: 'Instagram', symbol: '◉' },
-  { label: 'LinkedIn', symbol: 'in' },
-  { label: 'Discord', symbol: '◈' },
-];
-
 export function Footer({ accent, headingFont, bodyFont }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -49,17 +42,16 @@ export function Footer({ accent, headingFont, bodyFont }) {
               Digital marketing that doesn't whisper. We build campaigns that move audiences,
               shift markets, and deliver outcomes that matter.
             </p>
-            <div style={{ display: 'flex', gap: 10 }}>
-              {SOCIALS.map((s, i) => (
-                <a key={i} href="#" className="footer-social" aria-label={s.label} style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  width: 40, height: 40, fontSize: 14, fontWeight: 700,
-                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-                  color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'all 0.25s',
-                  fontFamily: bodyFont,
-                }}>{s.symbol}</a>
-              ))}
-            </div>
+            <a href="mailto:contact@exomarketing.gg" className="footer-link" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              fontFamily: headingFont, fontSize: 13, fontWeight: 700,
+              color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              padding: '12px 18px', border: '1px solid rgba(255,255,255,0.12)',
+              transition: 'all 0.25s',
+            }}>
+              <span style={{ fontSize: 14 }}>✉</span> contact@exomarketing.gg
+            </a>
           </div>
 
           <FooterCol title="Navigate" headingFont={headingFont} bodyFont={bodyFont} items={[
