@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 function FooterCol({ title, items, headingFont, bodyFont }) {
@@ -18,15 +17,7 @@ function FooterCol({ title, items, headingFont, bodyFont }) {
 }
 
 export function Footer({ accent, headingFont, bodyFont }) {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const isMobile = useIsMobile();
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    setSubscribed(true);
-    setTimeout(() => { setSubscribed(false); setEmail(''); }, 2500);
-  };
 
   return (
     <footer style={{
@@ -35,10 +26,10 @@ export function Footer({ accent, headingFont, bodyFont }) {
       borderTop: '1px solid rgba(255,255,255,0.06)',
       background: '#000', position: 'relative', overflow: 'hidden',
     }}>
-<div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1.5fr 1fr 1fr 1.4fr',
+          gridTemplateColumns: isMobile ? '1fr' : '1.6fr 1fr 1fr',
           gap: isMobile ? 40 : 60,
           marginBottom: isMobile ? 48 : 80,
         }}>
@@ -46,7 +37,7 @@ export function Footer({ accent, headingFont, bodyFont }) {
             <a href="#home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginBottom: 20 }}>
               <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: 56, width: 'auto' }} />
             </a>
-            <p style={{ fontFamily: bodyFont, fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.45)', margin: '0 0 24px', maxWidth: 320 }}>
+            <p style={{ fontFamily: bodyFont, fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.45)', margin: '0 0 24px', maxWidth: 360 }}>
               Digital marketing that doesn't whisper. We build campaigns that move audiences,
               shift markets, and deliver outcomes that matter.
             </p>
@@ -75,31 +66,6 @@ export function Footer({ accent, headingFont, bodyFont }) {
             { label: 'Brokering', href: '#services' },
             { label: 'Analytics', href: '#services' },
           ]} />
-
-          <div>
-            <h4 style={{ fontFamily: headingFont, fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 14, letterSpacing: '0.12em', textTransform: 'uppercase' }}>Stay in the loop</h4>
-            <p style={{ fontFamily: bodyFont, fontSize: 13, lineHeight: 1.6, color: 'rgba(255,255,255,0.4)', marginBottom: 16 }}>Marketing insights and case studies. Monthly. No spam.</p>
-            <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: 0 }}>
-              <input
-                type="email" placeholder="you@email.com" value={email} required
-                onChange={e => setEmail(e.target.value)}
-                className="footer-newsletter"
-                style={{
-                  flex: 1, padding: '12px 14px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.08)', borderRight: 'none',
-                  color: '#fff', fontFamily: bodyFont, fontSize: 13,
-                  outline: 'none', minWidth: 0, transition: 'border-color 0.3s',
-                }}
-              />
-              <button type="submit" style={{
-                padding: '12px 20px', background: accent, color: '#000',
-                border: 'none', cursor: 'pointer',
-                fontFamily: headingFont, fontSize: 12, fontWeight: 700,
-                letterSpacing: '0.1em', textTransform: 'uppercase', transition: 'filter 0.2s',
-              }}>{subscribed ? '✓' : 'Join'}</button>
-            </form>
-          </div>
         </div>
 
         <div style={{
@@ -112,8 +78,11 @@ export function Footer({ accent, headingFont, bodyFont }) {
           <p style={{ fontFamily: bodyFont, fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0 }}>© 2026 ExoMarketing. All rights reserved.</p>
           <p style={{ fontFamily: headingFont, fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Built to win • Crafted in 2026</p>
           <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy', 'Terms'].map(l => (
-              <a key={l} href="#" className="footer-link" style={{ fontFamily: bodyFont, fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>{l}</a>
+            {[
+              { label: 'Privacy', href: '#privacy' },
+              { label: 'Terms', href: '#terms' },
+            ].map(l => (
+              <a key={l.label} href={l.href} className="footer-link" style={{ fontFamily: bodyFont, fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>{l.label}</a>
             ))}
           </div>
         </div>

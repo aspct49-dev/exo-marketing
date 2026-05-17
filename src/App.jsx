@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTweaks } from './hooks/useTweaks';
 import { ParticleField } from './components/ParticleField';
 import { CursorGlow } from './components/CursorGlow';
@@ -11,6 +11,22 @@ import { About } from './components/About';
 import { CTABanner } from './components/CTABanner';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { LegalPage } from './components/LegalPage';
+
+function useLegalRoute() {
+  const read = () => {
+    const h = window.location.hash.replace(/^#\/?/, '');
+    if (h === 'privacy' || h === 'terms') return h;
+    return null;
+  };
+  const [route, setRoute] = useState(read);
+  useEffect(() => {
+    const onHash = () => setRoute(read());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  return route;
+}
 
 const FONT_PRESETS = {
   chakra: { heading: "'Chakra Petch', sans-serif", body: "'DM Sans', sans-serif" },
@@ -23,6 +39,7 @@ const DEFAULTS = { accentColor: '#fff', fontPreset: 'bebas' };
 export default function App() {
   const [t, setTweak] = useTweaks(DEFAULTS);
   const fonts = FONT_PRESETS[t.fontPreset] || FONT_PRESETS.bebas;
+  const legal = useLegalRoute();
 
   useEffect(() => {
     document.documentElement.style.setProperty('--accent', t.accentColor);
@@ -35,15 +52,21 @@ export default function App() {
       <ParticleField count={120} />
       <CursorGlow accent={t.accentColor} />
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <Nav {...props} />
-        <Hero {...props} />
-        <Brands {...props} />
-        <Services {...props} />
-        <Process {...props} />
-        <About {...props} />
-        <CTABanner {...props} />
-        <Contact {...props} />
-        <Footer {...props} />
+        {legal ? (
+          <LegalPage kind={legal} {...props} />
+        ) : (
+          <>
+            <Nav {...props} />
+            <Hero {...props} />
+            <Brands {...props} />
+            <Services {...props} />
+            <Process {...props} />
+            <About {...props} />
+            <CTABanner {...props} />
+            <Contact {...props} />
+            <Footer {...props} />
+          </>
+        )}
       </div>
     </div>
   );
