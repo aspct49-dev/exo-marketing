@@ -1,6 +1,7 @@
 import { FadeIn } from './FadeIn';
 import { SectionTag } from './SectionTag';
 import { AnimatedDivider } from './AnimatedDivider';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const SERVICES = [
   { num: '01', title: 'Digital Strategy', desc: "Bespoke strategies built on data, refined through testing, optimized for maximum ROI. We don't guess — we engineer results." },
@@ -10,9 +11,10 @@ const SERVICES = [
 ];
 
 export function Services({ accent, headingFont, bodyFont }) {
+  const isMobile = useIsMobile();
   return (
     <section id="services" style={{
-      padding: '80px 48px 120px', position: 'relative', overflow: 'hidden',
+      padding: isMobile ? '56px 20px 72px' : '80px 48px 120px', position: 'relative', overflow: 'hidden',
     }}>
       {/* Faint grid backdrop */}
       <div aria-hidden style={{
@@ -27,8 +29,8 @@ export function Services({ accent, headingFont, bodyFont }) {
         <FadeIn>
           <SectionTag text="What We Do" accent={accent} />
           <h2 style={{
-            fontFamily: headingFont, fontSize: 48, fontWeight: 800,
-            color: '#fff', margin: '0 0 64px', letterSpacing: '-0.02em',
+            fontFamily: headingFont, fontSize: isMobile ? 32 : 48, fontWeight: 800,
+            color: '#fff', margin: isMobile ? '0 0 40px' : '0 0 64px', letterSpacing: '-0.02em',
             textTransform: 'uppercase', lineHeight: 1.05,
           }}>Our Services</h2>
         </FadeIn>
@@ -36,8 +38,11 @@ export function Services({ accent, headingFont, bodyFont }) {
           {SERVICES.map((s, i) => (
             <FadeIn key={i} delay={i * 0.06}>
               <div className="service-row" style={{
-                display: 'grid', gridTemplateColumns: '60px 1fr 1.2fr', gap: 32,
-                alignItems: 'baseline', padding: '36px 0',
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '44px 1fr' : '60px 1fr 1.2fr',
+                gap: isMobile ? 16 : 32,
+                alignItems: isMobile ? 'start' : 'baseline',
+                padding: isMobile ? '24px 0' : '36px 0',
                 borderTop: '1px solid rgba(255,255,255,0.06)',
                 cursor: 'default', transition: 'all 0.3s', position: 'relative',
               }}>
@@ -46,13 +51,14 @@ export function Services({ accent, headingFont, bodyFont }) {
                   color: accent, letterSpacing: '0.05em',
                 }}>{s.num}</span>
                 <h3 className="service-title" style={{
-                  fontFamily: headingFont, fontSize: 28, fontWeight: 700,
+                  fontFamily: headingFont, fontSize: isMobile ? 20 : 28, fontWeight: 700,
                   color: '#fff', margin: 0, textTransform: 'uppercase',
                   letterSpacing: '-0.01em', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
                 }}>{s.title}</h3>
                 <p style={{
-                  fontFamily: bodyFont, fontSize: 15, lineHeight: 1.7,
+                  fontFamily: bodyFont, fontSize: isMobile ? 14 : 15, lineHeight: 1.7,
                   color: 'rgba(255,255,255,0.35)', margin: 0, transition: 'color 0.3s',
+                  gridColumn: isMobile ? '2 / 3' : 'auto',
                 }}>{s.desc}</p>
               </div>
             </FadeIn>

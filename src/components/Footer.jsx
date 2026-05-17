@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 function FooterCol({ title, items, headingFont, bodyFont }) {
   return (
@@ -19,6 +20,7 @@ function FooterCol({ title, items, headingFont, bodyFont }) {
 export function Footer({ accent, headingFont, bodyFont }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -28,12 +30,18 @@ export function Footer({ accent, headingFont, bodyFont }) {
 
   return (
     <footer style={{
-      paddingTop: 80, paddingBottom: 32, paddingLeft: 48, paddingRight: 48,
+      paddingTop: isMobile ? 56 : 80, paddingBottom: isMobile ? 24 : 32,
+      paddingLeft: isMobile ? 20 : 48, paddingRight: isMobile ? 20 : 48,
       borderTop: '1px solid rgba(255,255,255,0.06)',
       background: '#000', position: 'relative', overflow: 'hidden',
     }}>
 <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1.4fr', gap: 60, marginBottom: 80 }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1.5fr 1fr 1fr 1.4fr',
+          gap: isMobile ? 40 : 60,
+          marginBottom: isMobile ? 48 : 80,
+        }}>
           <div>
             <a href="#home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginBottom: 20 }}>
               <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: 56, width: 'auto' }} />
@@ -95,7 +103,9 @@ export function Footer({ accent, headingFont, bodyFont }) {
         </div>
 
         <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          display: 'flex',
+          justifyContent: isMobile ? 'center' : 'space-between',
+          alignItems: 'center', textAlign: isMobile ? 'center' : 'left',
           paddingTop: 28, borderTop: '1px solid rgba(255,255,255,0.06)',
           flexWrap: 'wrap', gap: 16,
         }}>

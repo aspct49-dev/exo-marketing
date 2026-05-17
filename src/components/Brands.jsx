@@ -1,6 +1,7 @@
 import { FadeIn } from './FadeIn';
 import { SectionTag } from './SectionTag';
 import { hexToRGBA } from '../utils/color';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const BRANDS = [
   { name: 'Stake',      src: '/uploads/stake.png',     h: 44, invert: true },
@@ -48,20 +49,21 @@ function BrandItem({ brand, accent }) {
 }
 
 export function Brands({ accent, headingFont }) {
+  const isMobile = useIsMobile();
   const rowA = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS];
   const rowB = [...BRANDS.slice(2), ...BRANDS.slice(0, 2), ...BRANDS, ...BRANDS, ...BRANDS];
 
   return (
     <section id="brands" style={{
-      padding: '100px 0 80px', position: 'relative',
+      padding: isMobile ? '64px 0 56px' : '100px 0 80px', position: 'relative',
       background: 'radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.025), transparent 70%)',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center', padding: '0 48px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center', padding: isMobile ? '0 20px' : '0 48px' }}>
         <FadeIn>
           <SectionTag text="Our Partners" accent={accent} />
           <h2 style={{
-            fontFamily: headingFont, fontSize: 44, fontWeight: 800,
-            color: '#fff', margin: '0 0 64px', letterSpacing: '-0.02em',
+            fontFamily: headingFont, fontSize: isMobile ? 30 : 44, fontWeight: 800,
+            color: '#fff', margin: isMobile ? '0 0 44px' : '0 0 64px', letterSpacing: '-0.02em',
             textTransform: 'uppercase', lineHeight: 1.05,
           }}>Trusted by Leading Brands</h2>
         </FadeIn>

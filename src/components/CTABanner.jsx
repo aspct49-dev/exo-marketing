@@ -1,5 +1,6 @@
 import { FadeIn } from './FadeIn';
 import { hexToRGBA } from '../utils/color';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 function WaveText({ text, className, style, startDelay = 0, stagger = 0.06 }) {
   let i = 0;
@@ -20,12 +21,14 @@ function WaveText({ text, className, style, startDelay = 0, stagger = 0.06 }) {
 }
 
 export function CTABanner({ accent, headingFont }) {
+  const isMobile = useIsMobile();
+  const headlineSize = isMobile ? 56 : 132;
   return (
-    <section id="cta" style={{ padding: '220px 48px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+    <section id="cta" style={{ padding: isMobile ? '120px 20px' : '220px 48px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
       <div style={{
         position: 'absolute', inset: 0, display: 'flex',
         alignItems: 'center', justifyContent: 'center',
-        fontFamily: headingFont, fontSize: 380, fontWeight: 800,
+        fontFamily: headingFont, fontSize: isMobile ? 180 : 380, fontWeight: 800,
         color: 'transparent',
         WebkitTextStroke: `1px ${hexToRGBA(accent, 0.08)}`,
         textTransform: 'uppercase', letterSpacing: '-0.04em',
@@ -34,7 +37,7 @@ export function CTABanner({ accent, headingFont }) {
       }}>EXO</div>
 
       <div style={{
-        position: 'absolute', width: 700, height: 700,
+        position: 'absolute', width: isMobile ? 400 : 700, height: isMobile ? 400 : 700,
         top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
         background: accent, borderRadius: '50%',
         filter: 'blur(220px)', opacity: 0.08, pointerEvents: 'none',
@@ -43,8 +46,8 @@ export function CTABanner({ accent, headingFont }) {
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1000, margin: '0 auto' }}>
         <FadeIn>
           <p style={{
-            fontFamily: headingFont, fontSize: 13, fontWeight: 700,
-            color: accent, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 56,
+            fontFamily: headingFont, fontSize: isMobile ? 11 : 13, fontWeight: 700,
+            color: accent, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: isMobile ? 32 : 56,
           }}>※ Ready to make moves? ※</p>
         </FadeIn>
         <FadeIn delay={0.08}>
@@ -53,8 +56,8 @@ export function CTABanner({ accent, headingFont }) {
             className="cta-wave"
             startDelay={0}
             style={{
-              fontFamily: headingFont, fontSize: 132, fontWeight: 800,
-              color: '#fff', margin: '0 0 28px', lineHeight: 1,
+              fontFamily: headingFont, fontSize: headlineSize, fontWeight: 800,
+              color: '#fff', margin: '0 0 20px', lineHeight: 1,
               letterSpacing: '-0.04em', textTransform: 'uppercase',
             }}
           />
@@ -65,9 +68,9 @@ export function CTABanner({ accent, headingFont }) {
             className="cta-wave cta-wave-outline"
             startDelay={0.4}
             style={{
-              fontFamily: headingFont, fontSize: 132, fontWeight: 800,
+              fontFamily: headingFont, fontSize: headlineSize, fontWeight: 800,
               color: 'transparent', WebkitTextStroke: `2px ${accent}`,
-              margin: '0 0 80px', lineHeight: 1,
+              margin: isMobile ? '0 0 48px' : '0 0 80px', lineHeight: 1,
               letterSpacing: '-0.04em', textTransform: 'uppercase',
               '--outline-color': accent,
             }}
@@ -77,7 +80,8 @@ export function CTABanner({ accent, headingFont }) {
           <a href="#contact" className="cta-button" style={{
             display: 'inline-flex', alignItems: 'center', gap: 12,
             background: accent, color: '#000',
-            padding: '22px 48px', fontSize: 15, fontWeight: 700,
+            padding: isMobile ? '16px 32px' : '22px 48px',
+            fontSize: isMobile ? 13 : 15, fontWeight: 700,
             fontFamily: headingFont, textDecoration: 'none',
             letterSpacing: '0.15em', textTransform: 'uppercase',
             transition: 'all 0.3s', position: 'relative', overflow: 'hidden',

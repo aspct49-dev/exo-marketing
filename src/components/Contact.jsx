@@ -3,6 +3,7 @@ import { FadeIn } from './FadeIn';
 import { SectionTag } from './SectionTag';
 import { AnimatedDivider } from './AnimatedDivider';
 import { hexToRGBA } from '../utils/color';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 function InfoItem({ icon, label, value, bodyFont }) {
   return (
@@ -25,6 +26,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [focused, setFocused] = useState(null);
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
 
   return (
     <section id="contact" style={{
-      padding: '140px 48px', position: 'relative', overflow: 'hidden',
+      padding: isMobile ? '80px 20px' : '140px 48px', position: 'relative', overflow: 'hidden',
     }}>
       {/* Soft radial spotlight from below */}
       <div aria-hidden style={{
@@ -53,20 +55,22 @@ export function Contact({ accent, headingFont, bodyFont }) {
       }} />
       <AnimatedDivider accent={accent} />
       <div style={{
-        maxWidth: 1100, margin: '0 auto', paddingTop: 40,
-        display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'start',
+        maxWidth: 1100, margin: '0 auto', paddingTop: isMobile ? 24 : 40,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1.1fr',
+        gap: isMobile ? 40 : 80, alignItems: 'start',
       }}>
         <div>
           <FadeIn direction="right">
             <SectionTag text="Get In Touch" accent={accent} />
             <h2 style={{
-              fontFamily: headingFont, fontSize: 56, fontWeight: 800,
+              fontFamily: headingFont, fontSize: isMobile ? 34 : 56, fontWeight: 800,
               color: '#fff', margin: '0 0 20px', lineHeight: 1.05,
               letterSpacing: '-0.02em', textTransform: 'uppercase',
             }}>
               Let's Build<br /><span style={{ color: accent }}>Something Big</span>
             </h2>
-            <p style={{ fontFamily: bodyFont, fontSize: 16, lineHeight: 1.8, color: 'rgba(255,255,255,0.4)', margin: '0 0 40px', maxWidth: 380 }}>
+            <p style={{ fontFamily: bodyFont, fontSize: isMobile ? 14 : 16, lineHeight: 1.8, color: 'rgba(255,255,255,0.4)', margin: isMobile ? '0 0 28px' : '0 0 40px', maxWidth: 380 }}>
               Ready to dominate your market? Drop us a line and let's talk about your next move.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -78,7 +82,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
         <FadeIn direction="left" delay={0.1}>
           <div style={{
             background: 'rgba(255,255,255,0.015)', border: '1px solid rgba(255,255,255,0.06)',
-            padding: '40px 36px', position: 'relative', overflow: 'hidden',
+            padding: isMobile ? '28px 20px' : '40px 36px', position: 'relative', overflow: 'hidden',
           }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: 60, height: 2, background: accent }} />
             <div style={{ position: 'absolute', top: 0, left: 0, width: 2, height: 60, background: accent }} />
