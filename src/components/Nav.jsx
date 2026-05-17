@@ -14,17 +14,19 @@ export function Nav({ accent, headingFont }) {
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
       padding: isMobile ? '0 20px' : '0 56px', height: isMobile ? 64 : 96,
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      display: 'grid',
+      gridTemplateColumns: isMobile ? 'auto 1fr auto' : '1fr auto 1fr',
+      alignItems: 'center',
       background: scrolled ? 'rgba(0,0,0,0.85)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
       WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
       transition: 'all 0.35s ease',
     }}>
-      <a href="#home" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+      <a href="#home" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', justifySelf: 'start' }}>
         <img src="/uploads/content.png" alt="ExoMarketing" style={{ height: isMobile ? 44 : 72, width: 'auto' }} />
       </a>
-      <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 36 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 36, justifySelf: 'center' }}>
         {!isMobile && ['Services', 'About', 'Brands'].map(l => (
           <a key={l} href={`#${l.toLowerCase()}`} className="nav-link" style={{
             fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.5)',
@@ -32,13 +34,14 @@ export function Nav({ accent, headingFont }) {
             letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: headingFont,
           }}>{l}</a>
         ))}
-        <a href="#contact" className="nav-cta" style={{
-          fontSize: 12, fontWeight: 700, color: '#000',
-          background: accent, padding: isMobile ? '9px 18px' : '10px 24px',
-          textDecoration: 'none', transition: 'all 0.25s',
-          letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: headingFont,
-        }}>Contact</a>
       </div>
+      <a href="#contact" className="nav-cta" style={{
+        fontSize: 12, fontWeight: 700, color: '#000',
+        background: accent, padding: isMobile ? '9px 18px' : '10px 24px',
+        textDecoration: 'none', transition: 'all 0.25s',
+        letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: headingFont,
+        justifySelf: 'end',
+      }}>Contact</a>
     </nav>
   );
 }
