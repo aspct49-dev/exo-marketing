@@ -1,0 +1,17 @@
+{
+  "name": "ExoMarketing",
+  "short_name": "ExoMarketing",
+  "description": "iGaming marketing agency for casino, sportsbook, and crypto-casino brands.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/uploads/logo-new.png",
+      "type": "image/png",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}

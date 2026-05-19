@@ -1,0 +1,188 @@
+import { useState } from 'react';
+import { FadeIn } from './FadeIn';
+import { SectionTag } from './SectionTag';
+import { AnimatedDivider } from './AnimatedDivider';
+import { hexToRGBA } from '../utils/color';
+import { useIsMobile } from '../hooks/useIsMobile';
+
+function InfoItem({ icon, label, value, bodyFont }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div style={{
+        width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', flexShrink: 0,
+      }}>
+        <span style={{ fontSize: 18, lineHeight: 1 }}>{icon}</span>
+      </div>
+      <div>
+        <div style={{ fontFamily: bodyFont, fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>{label}</div>
+        <div style={{ fontFamily: bodyFont, fontSize: 15, color: 'rgba(255,255,255,0.7)' }}>{value}</div>
+      </div>
+    </div>
+  );
+}
+
+export function Contact({ accent, headingFont, bodyFont }) {
+  const [form, setForm] = useState({ name: '', contact: '', company: '', message: '' });
+  const [status, setStatus] = useState('idle');
+  const [focused, setFocused] = useState(null);
+  const isMobile = useIsMobile();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (status === 'sending') return;
+    const webhook = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
+    if (!webhook) {
+      console.error('VITE_DISCORD_WEBHOOK_URL is not set');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+    setStatus('sending');
+    const payload = {
+      username: 'ExoMarketing',
+      embeds: [{
+        title: '🎯 New Inquiry from ExoMarketing Website',
+        color: 0x5865F2,
+        fields: [
+          { name: '👤 Name',    value: form.name.slice(0, 256) || '—',          inline: true },
+          { name: '💬 Contact', value: form.contact.slice(0, 256) || '—',       inline: true },
+          { name: '🏢 Company', value: form.company.slice(0, 256) || '—',       inline: false },
+          { name: '📝 Message', value: form.message.slice(0, 1024) || '—',      inline: false },
+        ],
+        footer: { text: 'ExoMarketing Contact Form' },
+        timestamp: new Date().toISOString(),
+      }],
+    };
+    try {
+      const res = await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Discord webhook failed: ${res.status}`);
+      setStatus('sent');
+      setForm({ name: '', contact: '', company: '', message: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
+  };
+
+  const inputBase = {
+    width: '100%', boxSizing: 'border-box',
+    background: 'rgba(255,255,255,0.02)',
+    border: '1px solid rgba(255,255,255,0.07)',
+    padding: '15px 18px', fontSize: 15, fontFamily: bodyFont, color: '#fff',
+    outline: 'none', transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+  };
+
+  return (
+    <section id="contact" style={{
+      padding: isMobile ? '80px 20px' : '140px 48px', position: 'relative', overflow: 'hidden',
+    }}>
+      {/* Soft radial spotlight from below */}
+      <div aria-hidden style={{
+        position: 'absolute', left: '50%', bottom: '-30%', transform: 'translateX(-50%)',
+        width: 900, height: 900, borderRadius: '50%',
+        background: `radial-gradient(circle, ${hexToRGBA(accent, 0.06)}, transparent 60%)`,
+        filter: 'blur(40px)', pointerEvents: 'none',
+      }} />
+      <AnimatedDivider accent={accent} />
+      <div style={{
+        maxWidth: 1100, margin: '0 auto', paddingTop: isMobile ? 24 : 40,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1.1fr',
+        gap: isMobile ? 40 : 80, alignItems: 'start',
+      }}>
+        <div>
+          <FadeIn direction="right">
+            <SectionTag text="Get In Touch" accent={accent} />
+            <h2 style={{
+              fontFamily: headingFont, fontSize: isMobile ? 34 : 56, fontWeight: 800,
+              color: '#fff', margin: '0 0 20px', lineHeight: 1.05,
+              letterSpacing: '-0.02em', textTransform: 'uppercase',
+            }}>
+              Let's Build<br /><span style={{ color: accent }}>Something Big</span>
+            </h2>
+            <p style={{ fontFamily: bodyFont, fontSize: isMobile ? 14 : 16, lineHeight: 1.8, color: 'rgba(255,255,255,0.4)', margin: isMobile ? '0 0 28px' : '0 0 40px', maxWidth: 380 }}>
+              Ready to dominate your market? Drop us a line and let's talk about your next move.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <InfoItem icon="✉" label="Contact Us On" value="contact@exomarketing.gg" bodyFont={bodyFont} />
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn direction="left" delay={0.1}>
+          <div style={{
+            background: 'rgba(255,255,255,0.015)', border: '1px solid rgba(255,255,255,0.06)',
+            padding: isMobile ? '28px 20px' : '40px 36px', position: 'relative', overflow: 'hidden',
+          }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 60, height: 2, background: accent }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 2, height: 60, background: accent }} />
+            <h3 style={{
+              fontFamily: headingFont, fontSize: 18, fontWeight: 700,
+              color: '#fff', margin: '0 0 28px', letterSpacing: '0.06em', textTransform: 'uppercase',
+            }}>Send a Message</h3>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {[
+                { key: 'name', label: 'Your Name', type: 'text', placeholder: 'Your name' },
+                { key: 'contact', label: 'Discord ID / Telegram ID', type: 'text', placeholder: 'Discord ID/Telegram ID' },
+                { key: 'company', label: 'Company Name', type: 'text', placeholder: 'Company name' },
+              ].map(({ key, label, type, placeholder }) => (
+                <div key={key}>
+                  <label style={{
+                    fontFamily: bodyFont, fontSize: 11, fontWeight: 600,
+                    color: focused === key ? accent : 'rgba(255,255,255,0.3)',
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    marginBottom: 6, display: 'block', transition: 'color 0.3s',
+                  }}>{label}</label>
+                  <input type={type} placeholder={placeholder} required
+                         value={form[key]}
+                         onChange={e => setForm({ ...form, [key]: e.target.value })}
+                         onFocus={() => setFocused(key)}
+                         onBlur={() => setFocused(null)}
+                         className="contact-input"
+                         style={{ ...inputBase, borderColor: focused === key ? accent : 'rgba(255,255,255,0.07)' }} />
+                </div>
+              ))}
+              <div>
+                <label style={{
+                  fontFamily: bodyFont, fontSize: 11, fontWeight: 600,
+                  color: focused === 'message' ? accent : 'rgba(255,255,255,0.3)',
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  marginBottom: 6, display: 'block', transition: 'color 0.3s',
+                }}>Tell us about your project</label>
+                <textarea placeholder="Tell us about your project..." rows={5} required
+                          value={form.message}
+                          onChange={e => setForm({ ...form, message: e.target.value })}
+                          onFocus={() => setFocused('message')}
+                          onBlur={() => setFocused(null)}
+                          className="contact-input"
+                          style={{ ...inputBase, resize: 'vertical', minHeight: 120, borderColor: focused === 'message' ? accent : 'rgba(255,255,255,0.07)' }} />
+              </div>
+              <button type="submit" disabled={status === 'sending'} className="btn-primary" style={{
+                background: status === 'sent' ? '#10b981' : status === 'error' ? '#ef4444' : accent,
+                color: '#000',
+                padding: '16px 36px', fontSize: 13, fontWeight: 700,
+                fontFamily: headingFont, border: 'none',
+                cursor: status === 'sending' ? 'wait' : 'pointer',
+                opacity: status === 'sending' ? 0.7 : 1,
+                transition: 'all 0.3s', width: '100%',
+                letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 4,
+              }}>
+                {status === 'sending' && 'Sending…'}
+                {status === 'sent' && '✓ Sent'}
+                {status === 'error' && '✕ Failed — try again'}
+                {status === 'idle' && 'Send Message →'}
+              </button>
+            </form>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
