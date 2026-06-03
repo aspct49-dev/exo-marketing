@@ -52,6 +52,25 @@ export function Hero({ accent, headingFont, bodyFont }) {
             and accelerate your business growth.
           </p>
         </FadeIn>
+        <FadeIn delay={1.0}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: isMobile ? 12 : 20, marginBottom: isMobile ? 32 : 48,
+            padding: isMobile ? '0 20px' : '0',
+          }}>
+            <div style={{ flex: isMobile ? '0 0 24px' : '0 0 48px', height: 2, background: accent, opacity: 0.7 }} />
+            <span style={{
+              fontFamily: bodyFont, fontSize: isMobile ? 16 : 20,
+              fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, textAlign: 'center',
+            }}>
+              The only iGaming agency taking{' '}
+              <span style={{ color: accent }}>0% from creators</span>
+              {' '}— on any platform, any site
+            </span>
+            <div style={{ flex: isMobile ? '0 0 24px' : '0 0 48px', height: 2, background: accent, opacity: 0.7 }} />
+          </div>
+        </FadeIn>
         <FadeIn delay={1.05}>
           <div style={{ display: 'flex', gap: isMobile ? 12 : 20, justifyContent: 'center', flexWrap: 'wrap' }}>
             <MagneticButton href="#contact" className="btn-primary" style={{
