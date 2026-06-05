@@ -10,7 +10,8 @@ const BRANDS = [
   { name: '500 Casino', src: '/uploads/500casino.svg', h: 64, invert: false },
   { name: 'Gamdom',     src: '/uploads/gamdom.png',    h: 90, invert: false, fit: 'left' },
   { name: 'Kick',       src: '/uploads/kick.png',      h: 38, invert: false },
-  { name: 'Juice',      src: '/uploads/juice.png',     h: 44, invert: false },
+  { name: 'Juice',      src: '/uploads/juice.png',          h: 44, invert: false },
+  { name: 'Duelbits',   src: '/uploads/duelbits-logo.webp', h: 44, invert: false },
 ];
 
 function ImageLogo({ brand }) {
