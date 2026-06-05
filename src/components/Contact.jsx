@@ -47,7 +47,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
         fields: [
           { name: '👤 Name',    value: form.name.slice(0, 256) || '—',          inline: true },
           { name: '💬 Contact', value: form.contact.slice(0, 256) || '—',       inline: true },
-          { name: '🏢 Company', value: form.company.slice(0, 256) || '—',       inline: false },
+          { name: '🤝 Broker Referral', value: form.company.slice(0, 256) || '—', inline: false },
           { name: '📝 Message', value: form.message.slice(0, 1024) || '—',      inline: false },
         ],
         footer: { text: 'ExoMarketing Contact Form' },
@@ -131,7 +131,7 @@ export function Contact({ accent, headingFont, bodyFont }) {
               {[
                 { key: 'name', label: 'Your Name', type: 'text', placeholder: 'Your name' },
                 { key: 'contact', label: 'Discord ID / Telegram ID', type: 'text', placeholder: 'Discord ID/Telegram ID' },
-                { key: 'company', label: 'Company Name', type: 'text', placeholder: 'Company name' },
+                { key: 'company', label: 'What Broker referred you?', type: 'text', placeholder: 'Broker name' },
               ].map(({ key, label, type, placeholder }) => (
                 <div key={key}>
                   <label style={{
