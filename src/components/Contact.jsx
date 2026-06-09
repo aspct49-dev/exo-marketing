@@ -31,36 +31,14 @@ export function Contact({ accent, headingFont, bodyFont }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status === 'sending') return;
-    const webhook = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
-    if (!webhook) {
-      console.error('VITE_DISCORD_WEBHOOK_URL is not set');
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000);
-      return;
-    }
     setStatus('sending');
-    const payload = {
-      username: 'ExoMarketing',
-      embeds: [{
-        title: '🎯 New Inquiry from ExoMarketing Website',
-        color: 0x5865F2,
-        fields: [
-          { name: '👤 Name',    value: form.name.slice(0, 256) || '—',          inline: true },
-          { name: '💬 Contact', value: form.contact.slice(0, 256) || '—',       inline: true },
-          { name: '🤝 Broker Referral', value: form.company.slice(0, 256) || '—', inline: false },
-          { name: '📝 Message', value: form.message.slice(0, 1024) || '—',      inline: false },
-        ],
-        footer: { text: 'ExoMarketing Contact Form' },
-        timestamp: new Date().toISOString(),
-      }],
-    };
     try {
-      const res = await fetch(webhook, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error(`Discord webhook failed: ${res.status}`);
+      if (!res.ok) throw new Error(`Submit failed: ${res.status}`);
       setStatus('sent');
       setForm({ name: '', contact: '', company: '', message: '' });
       setTimeout(() => setStatus('idle'), 3000);
