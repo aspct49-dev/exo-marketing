@@ -22,9 +22,9 @@ app.set('trust proxy', 1);
 app.use('/api', express.json({ limit: '12kb' }));
 
 // --- Simple in-memory rate limiter (per IP) ---------------------------------
-// 5 submissions per 10 minutes. Plenty for a real human, useless for a spammer.
+// 2 submissions per 10 minutes. Plenty for a real human, useless for a spammer.
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_HITS = 5;
+const MAX_HITS = 2;
 const hits = new Map(); // ip -> number[] (timestamps)
 
 function rateLimited(ip) {
