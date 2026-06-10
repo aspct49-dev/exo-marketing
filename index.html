@@ -43,13 +43,13 @@
     <link rel="apple-touch-icon" href="/uploads/logo-new.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- Performance: preconnect to font origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload above-the-fold assets: hero logo + self-hosted fonts.
+         Fonts are same-origin now; the crossorigin attr is still required so the
+         preload matches the CORS-mode font fetch and isn't downloaded twice. -->
     <link rel="preload" as="image" href="/uploads/content.png" fetchpriority="high" />
-    <!-- Font stylesheet loaded directly (no inline onload) so the CSP can use a strict script-src 'self'.
-         display=swap keeps text visible immediately while the webfonts load. -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&family=Epilogue:wght@900&display=swap" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/bebas-neue-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/dm-sans-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-latin.woff2" crossorigin />
 
     <!-- Structured Data: ProfessionalService -->
     <script type="application/ld+json">
