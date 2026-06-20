@@ -12,7 +12,7 @@ const BRANDS = [
   { name: 'Kick',       src: '/uploads/kick.png',      h: 38, invert: false },
   { name: 'Juice',      src: '/uploads/juice.png',          h: 44, invert: false },
   { name: 'Duelbits',   src: '/uploads/duelbits-logo.webp', h: 120, invert: false },
-  { name: 'Packdraw',   src: '/uploads/packdraw.png',       h: 44, invert: false },
+  { name: 'Packdraw',   src: '/uploads/packdraw.png',       h: 64, invert: false },
 ];
 
 function ImageLogo({ brand }) {
